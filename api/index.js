@@ -557,6 +557,20 @@ async function endGame(roomCode) {
 }
 
 // ══════════════════════════════════════════════════════════
+//  FALLBACK para SPA (Single Page Application)
+// ══════════════════════════════════════════════════════════
+// Servir index.html para todas las rutas que no son API/archivos estáticos
+// Esto permite que el cliente-side routing funcione
+app.get('*', (req, res) => {
+  const indexPath = path.join(__dirname, '..', 'public', 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      res.status(404).json({ error: 'Not found' });
+    }
+  });
+});
+
+// ══════════════════════════════════════════════════════════
 //  EXPORTS for Vercel
 // ══════════════════════════════════════════════════════════
 module.exports = app;
