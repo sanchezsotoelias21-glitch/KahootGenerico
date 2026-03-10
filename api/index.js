@@ -50,6 +50,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Servir archivos estáticos desde public/
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 // ══════════════════════════════════════════════════════════
 //  IN-MEMORY GAME STATE
 // ══════════════════════════════════════════════════════════
